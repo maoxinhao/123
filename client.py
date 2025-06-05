@@ -92,7 +92,7 @@ def select_lsjf_server(servers, job):
 
         # Resource waste penalty (more precise)
         core_waste = max(0, core_ratio - 1) ** 1.5
-        resource_waste = core_waste * 300 + max(0, mem_ratio - 1) * 80 + max(0, disk_ratio - 1) * 100
+        resource_waste = core_waste * 300 + max(0, mem_ratio - 1) * 80 + max(0, disk_ratio - 1) * 80
 
         # Server cost factor (based on actual configuration)
         if server['cores'] >= 16:  # xlarge
@@ -155,8 +155,8 @@ def select_lsjf_server(servers, job):
     if best_server:
         return best_server['type'], best_server['id']
     else:
-        smallest = min(parsed, key=lambda s: s['cores'])
-        return smallest['type'], smallest['id']
+        maxest = max(parsed, key=lambda s: s['cores'])
+        return maxest['type'], maxest['id']
 
 
 def main():
